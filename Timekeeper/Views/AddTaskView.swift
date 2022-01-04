@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddTaskView: View {
-    
+    @EnvironmentObject var realmManager: RealmManager
     @State private var title: String = ""
     @Environment(\.dismiss) var dismiss // env obj since iOS 15, allows us to quickly dismiss a view
     
@@ -23,7 +23,9 @@ struct AddTaskView: View {
                 .textFieldStyle(.roundedBorder)
             
             Button {
-                print("task added!")
+                if title != "" {
+                    realmManager.addTask(taskTitle: title)
+                }
                 dismiss()
             } label: {
                 Text("Add task")
@@ -46,5 +48,6 @@ struct AddTaskView: View {
 struct AddTaskView_Previews: PreviewProvider {
     static var previews: some View {
         AddTaskView()
+            .environmentObject(RealmManager())
     }
 }

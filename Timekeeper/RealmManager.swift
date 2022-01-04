@@ -79,7 +79,7 @@ class RealmManager: ObservableObject {
             do {
                 let taskToDelete = localRealm.objects(Task.self).filter(NSPredicate(format: "id == %@", id))
                 
-                guard !taskToDelete.isEmpty else {return} // this statement checks if the task to update is empty, if so, it returns
+                guard !taskToDelete.isEmpty else {return}  // this statement checks if the task to update is empty, if so, it returns
                 
                 try localRealm.write {
                     localRealm.delete(taskToDelete)
